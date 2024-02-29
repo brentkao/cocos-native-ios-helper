@@ -1,9 +1,6 @@
 #!/bin/bash
 
 # 獲取腳本所在目錄的絕對路徑
-# projectPath="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-# 往回退一層(因資料夾結構不同)
-# projectPath="$(cd "$(dirname "${BASH_SOURCE[0]}")"/.. && pwd)"
 # 選擇專案路徑
 projectPath=$(osascript -e 'tell application "Finder" to return POSIX path of (choose folder with prompt "Select Your Project Folder")')
 projectPath="${projectPath%/}" # 移除路徑最後的斜線
@@ -30,7 +27,12 @@ readYesNo(){
        return 1
     fi
 }
-
+dividingLine(){
+    echo ""
+    printf '%*s\n' "$(tput cols)" '' | tr ' ' -
+    echo ""
+}
+dividingLine
 echo "可用的 Cocos Creator 版本有:"
 versions=("3.8.2" "3.8.1" "3.8.0" "退出(exit)")
 select version in ${versions[@]}; do
@@ -63,21 +65,36 @@ select version in ${versions[@]}; do
     break # 跳出循环
 done
 
-echo "開始 覆蓋 Admob 設定資料 (native-ios-build-files => navtive -> engine -> ios)"
+dividingLine
+echo "[Start] 設定資料 (native-ios-build-files => navtive -> engine -> ios)"
 cd -- "$(dirname "$BASH_SOURCE")"
+
+# Action
+readYesNo "use Admob"  # 是否使用 Admob
+isUsingAdmob=$?
+readYesNo "use Apple-IAP"  # 是否使用 Apple-IAP
+isUsingAppleIAP=$?
+readYesNo "use Apple-GameCenter"  # 是否使用 Apple-GameCenter
+isUsingAppleGameCenter=$?
 
 # 定義目錄和文件名
 copyFilesDir="./CopyFiles"
 targetFilesDir="native/engine/ios"
+#Google
 zipFile="GoogleMobileAdsSdkiOS-10.14.0.zip"
-folderName="GoogleMobileAdsSdkiOS-10.14.0"
+GoogleMobilefolderName="GoogleMobileAdsSdkiOS-10.14.0"
+AdmobFolderName="Admob"
+#Apple
+AppleIAPFolderName="AppleIAP"
+AppleGameCenterFolderName="AppleGameCenter"
 
+dividingLine
 checkEcho "開始檢查" "CopyFiles" "..."
-if [ ! -d "$copyFilesDir/$folderName" ]; then
+if [ ! -d "$copyFilesDir/$GoogleMobilefolderName" ]; then
     # 確保 ZIP 檔案存在
     if [ -f "./$zipFile" ]; then
         # 解壓縮後的檔案會放在 CopyFiles 目錄下
-        echo "目錄 $folderName 不存在，開始解壓縮..."
+        echo "目錄 $GoogleMobilefolderName 不存在，開始解壓縮..."
         unzip "$zipFile" -d "$copyFilesDir"
         echo "解壓縮完成。"
     else
@@ -85,13 +102,34 @@ if [ ! -d "$copyFilesDir/$folderName" ]; then
         exit 1
     fi
 else
-    checkEcho "結束檢查" "CopyFiles" "目錄 $folderName 已存在。"
+    checkEcho "結束檢查" "CopyFiles" "目錄 $GoogleMobilefolderName 已存在。"
 fi
 checkEcho "結束檢查" "CopyFiles"
 
 checkEcho "開始覆蓋" "CopyFiles" "..."
 echo "初始化所需的基礎資料"
-cp -R $copyFilesDir/* $projectPath/$targetFilesDir
+
+# 必要檔案
+cp -R $copyFilesDir/NotifyJSHelper $projectPath/$targetFilesDir
+
+if [ $isUsingAdmob -eq 0 ]; then
+    echo "複製 Admob 相關檔案"
+    cp -R $copyFilesDir/$GoogleMobilefolderName $projectPath/$targetFilesDir
+    cp -R $copyFilesDir/$AdmobFolderName $projectPath/$targetFilesDir
+    cp -R $copyFilesDir/AppDelegate.mm $projectPath/$targetFilesDir
+    cp -R $copyFilesDir/Info.plist $projectPath/$targetFilesDir
+fi
+
+if [ $isUsingAppleIAP -eq 0 ]; then
+    echo "複製 Apple-IAP 相關檔案"
+    cp -R $copyFilesDir/$AppleIAPFolderName $projectPath/$targetFilesDir
+fi
+
+if [ $isUsingAppleGameCenter -eq 0 ]; then
+    echo "複製 Apple-GameCenter 相關檔案"
+    cp -R $copyFilesDir/$AppleGameCenterFolderName $projectPath/$targetFilesDir
+fi
+
 checkEcho "結束覆蓋" "CopyFiles" "$targetFilesDir"
 
 if [ $isNativeFolder -eq 1 ]; then
