@@ -32,7 +32,7 @@
 #include "platform/ios/IOSPlatform.h"
 #import "platform/ios/AppDelegateBridge.h"
 #import "service/SDKWrapper.h"
-#import "AdmobAdManager.h"
+#import "Admob/AdmobAdManager.h"
 
 @implementation AppDelegate
 @synthesize window;

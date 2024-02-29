@@ -5,7 +5,7 @@
 
 #import "AdMobRewardedVideoViewController.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
-#import "NotifyJSHelper.h"
+#import "../NotifyJSHelper/NotifyJSHelper.h"
 @interface AdMobRewardedVideoViewController()<GADFullScreenContentDelegate>
 
 @property(nonatomic, strong) GADRewardedAd *rewardedAd;

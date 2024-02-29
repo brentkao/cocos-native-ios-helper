@@ -2,7 +2,7 @@
 #import <Foundation/Foundation.h>
 #import "GameCenterManager.h"
 #import "GameKitHelper.h"
-#import "NotifyJSHelper.h"
+#import "../NotifyJSHelper/NotifyJSHelper.h"
 
 @implementation GameCenterManager
 +(void)loginGameCenter{

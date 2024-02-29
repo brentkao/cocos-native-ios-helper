@@ -9,7 +9,7 @@
 #import "AdMobRewardedVideoViewController.h"
 #import "AdMobInterstitialViewController.h"
 #import <GoogleMobileAds/GoogleMobileAds.h>
-#import "NotifyJSHelper.h"
+#import "../NotifyJSHelper/NotifyJSHelper.h"
 
 @implementation AdmobAdManager
     

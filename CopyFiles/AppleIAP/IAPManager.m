@@ -1,7 +1,7 @@
 #import "IAPManager.h"
 #import <Foundation/Foundation.h>
 #import <StoreKit/StoreKit.h>
-#import "NotifyJSHelper.h"
+#import "../NotifyJSHelper/NotifyJSHelper.h"
 
 // 接口声明属性
 @interface IAPManager()<SKPaymentTransactionObserver,SKProductsRequestDelegate>{

@@ -4,7 +4,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ViewController.h"
+#import "../ViewController.h"
 #import "AdMobBannerViewController.h"
 #import "AdMobRewardedVideoViewController.h"
 #import "AdMobInterstitialViewController.h"
