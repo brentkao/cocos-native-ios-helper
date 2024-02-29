@@ -1,4 +1,5 @@
 # cocos-native-ios-helper
+[English](./README_en.md)
 
 在開始前必須要手動在 Cocos Creator 進行 Build 一次專案，來初始化 Cocos 自己文件的設定，否則無法完成([官方教學](https://docs.cocos.com/creator/manual/zh/editor/publish/ios/build-example-ios.html))。
 
