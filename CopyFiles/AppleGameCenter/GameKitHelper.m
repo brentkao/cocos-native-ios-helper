@@ -31,7 +31,7 @@
         [self setLastError:error];
         if (localPlayer.authenticated) {
             _gameCenterFeaturesEnabled = YES;
-            NSlog(@"授權完成")
+            NSLog(@"授權完成");
         } else if(viewController) {
             [self presentViewController:viewController];
         } else {
