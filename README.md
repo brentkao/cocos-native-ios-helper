@@ -14,11 +14,11 @@
 
 - Step 5 : 是否已有 native/engine/ios 資料夾?(y/n) ，選擇 `y`。
 
-- Step 6 : 完成。
+- Step 6 : 選擇是否要使用以下功能(Admob, AppleIAP, AppleGameCenter)。
+
+- Step 7 : 完成。
 
 ## Future
-- Apple - Game Center
-- Apple - In-App Purchase(IAP)
 - 等你來擴展(Waiting for you to expand)
 
 ## Issues

@@ -13,11 +13,11 @@ Currently available versions ("3.8.2", "3.8.1", "3.8.0") can be extended as need
 
 - Step 5: Is there already a native/engine/ios folder? (y/n), choose `y`.
 
-- Step 6: Completion.
+- Step 6: Choose whether to use the following features (Admob, Apple IAP, Apple Game Center).
+
+- Step 7: Completion.
 
 ## Future
-- Apple - Game Center
-- Apple - In-App Purchase (IAP)
 - Waiting for you to expand
 
 ## Issues
